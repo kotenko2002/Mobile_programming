@@ -25,9 +25,19 @@ class MainActivity : AppCompatActivity() {
         val submitButton = findViewById<Button>(R.id.submitButton)
 
         submitButton.setOnClickListener {
-            val name = nameInput.text.toString()
-            val surname = surnameInput.text.toString()
-            val email = emailInput.text.toString()
+            val name = nameInput.text.toString().trim()
+            val surname = surnameInput.text.toString().trim()
+            val email = emailInput.text.toString().trim()
+
+            if (name.isEmpty() || surname.isEmpty() || email.isEmpty()) {
+                Toast.makeText(this, "Будь ласка, заповніть усі поля", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidEmail(email)) {
+                Toast.makeText(this, "Невірний формат електронної пошти", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val intent = Intent(this, GreetingActivity::class.java).apply {
                 putExtra("USER_NAME", name)
@@ -83,5 +93,10 @@ class MainActivity : AppCompatActivity() {
     private fun LogAndToast(message: String) {
         //Log.d("MainActivity", message)
         //Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$".toRegex()
+        return email.matches(emailRegex)
     }
 }
