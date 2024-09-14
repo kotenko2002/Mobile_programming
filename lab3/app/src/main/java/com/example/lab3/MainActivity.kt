@@ -20,13 +20,20 @@ class MainActivity : AppCompatActivity() {
         LogAndToast("onCreate() called")
 
         val nameInput = findViewById<EditText>(R.id.nameInput)
+        val surnameInput = findViewById<EditText>(R.id.surnameInput)
+        val emailInput = findViewById<EditText>(R.id.emailInput)
         val submitButton = findViewById<Button>(R.id.submitButton)
 
         submitButton.setOnClickListener {
             val name = nameInput.text.toString()
+            val surname = surnameInput.text.toString()
+            val email = emailInput.text.toString()
 
-            val intent = Intent(this, GreetingActivity::class.java)
-            intent.putExtra("USER_NAME", name)
+            val intent = Intent(this, GreetingActivity::class.java).apply {
+                putExtra("USER_NAME", name)
+                putExtra("USER_SURNAME", surname)
+                putExtra("USER_EMAIL", email)
+            }
 
             startActivity(intent)
         }
@@ -74,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun LogAndToast(message: String) {
-        Log.d("MainActivity", message)
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        //Log.d("MainActivity", message)
+        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

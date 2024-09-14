@@ -6,18 +6,9 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/greetingTextView"
+        android:id="@+id/detailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="Привіт, !"
-        />
-
-    <Button
-        android:id="@+id/detailsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Детальніше"
-        android:layout_marginTop="16dp"
+        android:textSize="18sp"
         />
 </LinearLayout>

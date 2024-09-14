@@ -24,9 +24,14 @@
             android:name=".GreetingActivity"
             android:exported="false"
         />
-        
+
         <activity
             android:name=".HelpActivity"
+            android:exported="false"
+        />
+
+        <activity
+            android:name=".DetailedInfoActivity"
             android:exported="false"
         />
     </application>

@@ -12,6 +12,20 @@
         android:hint="Введіть ваше ім'я"
         />
 
+    <EditText
+        android:id="@+id/surnameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введіть ваше прізвище"
+        />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введіть вашу електронну пошту"
+        />
+
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
