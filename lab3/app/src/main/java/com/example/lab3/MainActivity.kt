@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("MainActivity", "onCreate() called")
+        LogAndToast("onCreate() called")
 
         val nameInput = findViewById<EditText>(R.id.nameInput)
         val submitButton = findViewById<Button>(R.id.submitButton)
@@ -49,26 +50,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d("MainActivity", "onStart() called")
+        LogAndToast("onStart() called")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("MainActivity", "onResume() called")
+        LogAndToast("onResume() called")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d("MainActivity", "onPause() called")
+        LogAndToast("onPause() called")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("MainActivity", "onStop() called")
+        LogAndToast("onStop() called")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("MainActivity", "onDestroy() called")
+        LogAndToast("onDestroy() called")
+    }
+
+    private fun LogAndToast(message: String) {
+        Log.d("MainActivity", message)
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
