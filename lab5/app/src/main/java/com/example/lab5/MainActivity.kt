@@ -1,18 +1,23 @@
 package com.example.lab5
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), FormFragment.OnDataPassListener {
 
-    private val stringList = arrayListOf("Apple", "Banana", "Cherry")
+    private val _recipes = arrayListOf(
+        Recipe("1X1", "1X2", "1X3"),
+        Recipe("2W1", "2W2", "2W3"),
+        Recipe("3G1", "3G2", "3G3"),
+        Recipe("4T1", "4T2", "4T3"),
+        Recipe("5B1", "5B2", "5B3"),
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val formFragment = FormFragment.newInstance(stringList)
+        val formFragment = FormFragment.newInstance(_recipes)
 
         supportFragmentManager
             .beginTransaction()
@@ -20,13 +25,10 @@ class MainActivity : AppCompatActivity(), FormFragment.OnDataPassListener {
             .commit()
     }
 
-    override fun onDataPass(newValue: String) {
-        stringList.add(newValue)
+    override fun onDataPass(newValue: Recipe) {
+        _recipes.add(newValue)
 
-        val joinedString = stringList.joinToString(",")
-        Log.d("MainActivity", "Updated list: $joinedString")
-
-        val formFragment = FormFragment.newInstance(stringList)
+        val formFragment = FormFragment.newInstance(_recipes)
 
         supportFragmentManager
             .beginTransaction()

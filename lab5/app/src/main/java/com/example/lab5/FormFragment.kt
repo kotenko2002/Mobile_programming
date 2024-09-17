@@ -10,12 +10,11 @@ import android.widget.Button
 import android.widget.TextView
 
 class FormFragment : Fragment() {
-
     private var listener: OnDataPassListener? = null
-    private var stringList: ArrayList<String>? = null
+    private var _recipes: ArrayList<Recipe>? = null
 
     interface OnDataPassListener {
-        fun onDataPass(newValue: String)
+        fun onDataPass(newValue: Recipe)
     }
 
     override fun onAttach(context: Context) {
@@ -31,7 +30,7 @@ class FormFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            stringList = it.getStringArrayList(ARG_STRING_LIST)
+            _recipes = it.getParcelableArrayList<Recipe>(ARG_RECIPES)
         }
     }
 
@@ -41,10 +40,11 @@ class FormFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_form, container, false)
 
-        view.findViewById<TextView>(R.id.temp_text).text = stringList?.joinToString(",")
+        val tempText = view.findViewById<TextView>(R.id.temp_text)
+        tempText.text = _recipes?.joinToString(",") { it.name }
 
         view.findViewById<Button>(R.id.pass_data_button_1).setOnClickListener {
-            listener?.onDataPass("New Item")
+            listener?.onDataPass(Recipe("123","123","123"))
         }
 
         return view
@@ -56,12 +56,12 @@ class FormFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_STRING_LIST = "string_list"
+        private const val ARG_RECIPES= "recipes"
 
-        fun newInstance(stringList: ArrayList<String>): FormFragment {
+        fun newInstance(stringList: ArrayList<Recipe>): FormFragment {
             val fragment = FormFragment()
             val args = Bundle()
-            args.putStringArrayList(ARG_STRING_LIST, stringList)
+            args.putParcelableArrayList(ARG_RECIPES, stringList);
             fragment.arguments = args
             return fragment
         }
