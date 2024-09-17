@@ -1,23 +1,27 @@
-package com.example.lab5
+package com.example.lab5.models
 
 import android.os.Parcel
 import android.os.Parcelable
 
 data class Recipe(
-    val name: String,
-    val description: String,
-    val ingredients: String
+    val title: String,
+    val shortDescription: String,
+    val ingredients: List<String>,
+    val instructions: List<String>
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString(),
-        parcel.readString().toString()
-    )
+        parcel.createStringArrayList() ?: emptyList(),
+        parcel.createStringArrayList() ?: emptyList()
+    ) {
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(description)
-        parcel.writeString(ingredients)
+        parcel.writeString(title)
+        parcel.writeString(shortDescription)
+        parcel.writeStringList(ingredients)
+        parcel.writeStringList(instructions)
     }
 
     override fun describeContents(): Int {
@@ -34,4 +38,3 @@ data class Recipe(
         }
     }
 }
-

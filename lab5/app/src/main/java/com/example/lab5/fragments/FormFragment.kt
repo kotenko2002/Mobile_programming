@@ -1,4 +1,4 @@
-package com.example.lab5
+package com.example.lab5.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.example.lab5.models.Recipe
+import com.example.lab5.R
+import com.example.lab5.databinding.FragmentFormBinding
 
 class FormFragment : Fragment() {
-    private var listener: OnDataPassListener? = null
+    private lateinit var _binding: FragmentFormBinding
+    private var _listener: OnDataPassListener? = null
     private var _recipes: ArrayList<Recipe>? = null
 
     interface OnDataPassListener {
@@ -20,7 +24,7 @@ class FormFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnDataPassListener) {
-            listener = context
+            _listener = context
         } else {
             throw RuntimeException("$context must implement OnDataPassListener")
         }
@@ -38,13 +42,14 @@ class FormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_form, container, false)
+        _binding = FragmentFormBinding.inflate(inflater)
+        val view = _binding.root
 
         val tempText = view.findViewById<TextView>(R.id.temp_text)
-        tempText.text = _recipes?.joinToString(",") { it.name }
+        tempText.text = _recipes?.joinToString(",") { it.title }
 
         view.findViewById<Button>(R.id.pass_data_button_1).setOnClickListener {
-            listener?.onDataPass(Recipe("123","123","123"))
+            _listener?.onDataPass(Recipe("5B1", "5B2",  listOf("1"), listOf("1")))
         }
 
         return view
@@ -52,7 +57,7 @@ class FormFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
+        _listener = null
     }
 
     companion object {
