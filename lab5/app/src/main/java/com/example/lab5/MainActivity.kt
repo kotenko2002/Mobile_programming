@@ -3,8 +3,7 @@ package com.example.lab5
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab5.fragments.FormFragment
-import com.example.lab5.models.Recipe
-import com.example.lab5.models.RecipeData
+import com.example.lab5.fragments.ListFragment
 
 class MainActivity : AppCompatActivity(), FormFragment.OnDataPassListener {
     private val _recipes = RecipeData.recipes
@@ -14,10 +13,12 @@ class MainActivity : AppCompatActivity(), FormFragment.OnDataPassListener {
         setContentView(R.layout.activity_main)
 
         val formFragment = FormFragment.newInstance(_recipes)
+        val listFragment = ListFragment.newInstance(_recipes)
 
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.topFragment, formFragment)
+            .replace(R.id.bottomFragment, listFragment)
             .commit()
     }
 

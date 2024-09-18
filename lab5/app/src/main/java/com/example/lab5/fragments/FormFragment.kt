@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.example.lab5.models.Recipe
 import com.example.lab5.R
 import com.example.lab5.databinding.FragmentFormBinding
+import com.example.lab5.Recipe
 
 class FormFragment : Fragment() {
     private lateinit var _binding: FragmentFormBinding
