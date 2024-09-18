@@ -1,8 +1,11 @@
 package com.example.lab5
 
+import java.util.UUID
+
 object RecipeData {
     val recipes = arrayListOf(
         Recipe(
+            id = UUID.randomUUID().toString(),
             title = "Спагеті Карбонара",
             shortDescription = "Класична італійська паста з кремовим соусом і панчеттою.",
             ingredients = listOf("Спагеті", "Яйця", "Пармезан", "Панчетта", "Часник", "Чорний перець"),
@@ -16,6 +19,7 @@ object RecipeData {
             )
         ),
         Recipe(
+            id = UUID.randomUUID().toString(),
             title = "Курячий каррі",
             shortDescription = "Гостре і ароматне куряче каррі з пряними спеціями.",
             ingredients = listOf("Курка", "Цибуля", "Часник", "Імбир", "Каррі порошок", "Помідори", "Кокосове молоко", "Коріандр"),
@@ -29,6 +33,7 @@ object RecipeData {
             )
         ),
         Recipe(
+            id = UUID.randomUUID().toString(),
             title = "Цезар салат",
             shortDescription = "Хрусткий ромен з кремовою заправкою Цезар і крутонами.",
             ingredients = listOf("Ромен", "Заправка Цезар", "Крутони", "Пармезан", "Сік лимона"),
@@ -40,6 +45,7 @@ object RecipeData {
             )
         ),
         Recipe(
+            id = UUID.randomUUID().toString(),
             title = "Бефстроганов",
             shortDescription = "Ніжні шматочки яловичини в кремовому грибному соусі.",
             ingredients = listOf("Яловичина", "Гриби", "Цибуля", "Часник", "Бульйон яловичини", "Сметана", "Борошно", "Масло"),
@@ -54,6 +60,7 @@ object RecipeData {
             )
         ),
         Recipe(
+            id = UUID.randomUUID().toString(),
             title = "Овочеве рагу",
             shortDescription = "Швидке і корисне рагу з різноманітних свіжих овочів.",
             ingredients = listOf("Болгарський перець", "Броколі", "Морква", "Горошок", "Соєвий соус", "Часник", "Імбир", "Олія кунжуту"),

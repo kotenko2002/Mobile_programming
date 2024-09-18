@@ -4,12 +4,14 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Recipe(
-    val title: String,
-    val shortDescription: String,
-    val ingredients: List<String>,
-    val instructions: List<String>
+    var id: String,
+    var title: String,
+    var shortDescription: String,
+    var ingredients: List<String>,
+    var instructions: List<String>
 ): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.createStringArrayList() ?: emptyList(),
@@ -18,6 +20,7 @@ data class Recipe(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(title)
         parcel.writeString(shortDescription)
         parcel.writeStringList(ingredients)

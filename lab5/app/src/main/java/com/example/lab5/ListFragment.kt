@@ -1,4 +1,4 @@
-package com.example.lab5.fragments
+package com.example.lab5
 
 import android.content.Context
 import android.os.Bundle
@@ -6,19 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import com.example.lab5.R
-import com.example.lab5.databinding.FragmentFormBinding
-import com.example.lab5.Recipe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.lab5.adapters.RecipeAdapter
+import com.example.lab5.databinding.FragmentListBinding
 
-class FormFragment : Fragment() {
-    private lateinit var _binding: FragmentFormBinding
+class ListFragment : Fragment() {
+    private lateinit var _binding: FragmentListBinding
     private var _listener: OnDataPassListener? = null
     private var _recipes: ArrayList<Recipe>? = null
 
     interface OnDataPassListener {
-        fun onDataPass(newValue: Recipe)
+        fun openDetailFragment(recipe: Recipe)
     }
 
     override fun onAttach(context: Context) {
@@ -42,14 +41,15 @@ class FormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFormBinding.inflate(inflater)
+        _binding = FragmentListBinding.inflate(inflater)
         val view = _binding.root
 
-        val tempText = view.findViewById<TextView>(R.id.temp_text)
-        tempText.text = _recipes?.joinToString(",") { it.title }
-
-        view.findViewById<Button>(R.id.pass_data_button_1).setOnClickListener {
-            _listener?.onDataPass(Recipe("5B1", "5B2",  listOf("1"), listOf("1")))
+        val recyclerView: RecyclerView = _binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = _recipes?.let {
+            RecipeAdapter(it) { recipe ->
+                _listener?.openDetailFragment(recipe)
+            }
         }
 
         return view
@@ -63,8 +63,8 @@ class FormFragment : Fragment() {
     companion object {
         private const val ARG_RECIPES= "recipes"
 
-        fun newInstance(stringList: ArrayList<Recipe>): FormFragment {
-            val fragment = FormFragment()
+        fun newInstance(stringList: ArrayList<Recipe>): ListFragment {
+            val fragment = ListFragment()
             val args = Bundle()
             args.putParcelableArrayList(ARG_RECIPES, stringList);
             fragment.arguments = args
