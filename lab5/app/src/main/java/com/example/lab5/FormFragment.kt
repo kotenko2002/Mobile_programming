@@ -12,7 +12,6 @@ import java.util.UUID
 class FormFragment : Fragment() {
     private lateinit var _binding: FragmentFormBinding
     private var _listener: OnDataPassListener? = null
-    private var _recipes: ArrayList<Recipe>? = null
 
     interface OnDataPassListener {
         fun add(newValue: Recipe)
@@ -29,10 +28,6 @@ class FormFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            _recipes = it.getParcelableArrayList<Recipe>(ARG_RECIPES)
-        }
     }
 
     override fun onCreateView(
@@ -63,14 +58,8 @@ class FormFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_RECIPES= "recipes"
-
-        fun newInstance(stringList: ArrayList<Recipe>): FormFragment {
-            val fragment = FormFragment()
-            val args = Bundle()
-            args.putParcelableArrayList(ARG_RECIPES, stringList);
-            fragment.arguments = args
-            return fragment
+        fun newInstance(): FormFragment {
+            return FormFragment()
         }
     }
 }

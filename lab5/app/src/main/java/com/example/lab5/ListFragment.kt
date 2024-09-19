@@ -14,7 +14,7 @@ import com.example.lab5.databinding.FragmentListBinding
 class ListFragment : Fragment() {
     private lateinit var _binding: FragmentListBinding
     private var _listener: OnDataPassListener? = null
-    private var _recipes: ArrayList<Recipe>? = null
+    private lateinit var _recipes: ArrayList<Recipe>
 
     interface OnDataPassListener {
         fun openDetailFragment(recipe: Recipe)
@@ -33,7 +33,7 @@ class ListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            _recipes = it.getParcelableArrayList<Recipe>(ARG_RECIPES)
+            _recipes = it.getParcelableArrayList<Recipe>(ARG_RECIPES) ?: ArrayList()
         }
     }
 
@@ -46,10 +46,8 @@ class ListFragment : Fragment() {
 
         val recyclerView: RecyclerView = _binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = _recipes?.let {
-            RecipeAdapter(it) { recipe ->
-                _listener?.openDetailFragment(recipe)
-            }
+        recyclerView.adapter = RecipeAdapter(_recipes) { recipe ->
+            _listener?.openDetailFragment(recipe)
         }
 
         return view
@@ -61,12 +59,12 @@ class ListFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_RECIPES= "recipes"
+        private const val ARG_RECIPES = "recipes"
 
         fun newInstance(stringList: ArrayList<Recipe>): ListFragment {
             val fragment = ListFragment()
             val args = Bundle()
-            args.putParcelableArrayList(ARG_RECIPES, stringList);
+            args.putParcelableArrayList(ARG_RECIPES, stringList)
             fragment.arguments = args
             return fragment
         }

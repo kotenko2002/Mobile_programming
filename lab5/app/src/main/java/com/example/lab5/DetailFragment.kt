@@ -11,9 +11,11 @@ import com.example.lab5.databinding.FragmentDetailBinding
 class DetailFragment : Fragment() {
     private lateinit var _binding: FragmentDetailBinding
     private var _listener: OnDataPassListener? = null
-    private var _recipe: Recipe? = null
+    private lateinit var _recipe: Recipe
 
     interface OnDataPassListener {
+        fun back()
+        fun saveChanges(recipe: Recipe)
         fun delete(recipeId: String)
     }
 
@@ -30,7 +32,7 @@ class DetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            _recipe = it.getParcelable(ARG_RECIPE)
+            _recipe = it.getParcelable(ARG_RECIPE) ?: Recipe()
         }
     }
 
@@ -41,9 +43,28 @@ class DetailFragment : Fragment() {
         _binding = FragmentDetailBinding.inflate(inflater)
         val view = _binding.root
 
-        //_binding.deleteRecipeButton.setOnClickListener {
-        //_listener?.delete(_recipe?.id ?: "")
-        //}
+        _binding.titleInput.setText(_recipe.title)
+        _binding.shortDescriptionInput.setText(_recipe.shortDescription)
+        _binding.ingredientsInput.setText(_recipe.ingredients.joinToString(separator = ","))
+        _binding.instructionsInput.setText(_recipe.instructions.joinToString(separator = ","))
+
+        _binding.backButton.setOnClickListener {
+            _listener?.back()
+        }
+        _binding.saveChangesButton.setOnClickListener {
+            val recipe = Recipe(
+                id = _recipe.id,
+                title = _binding.titleInput.text.toString(),
+                shortDescription = _binding.shortDescriptionInput.text.toString(),
+                ingredients = _binding.ingredientsInput.text.split(","),
+                instructions = _binding.instructionsInput.text.split("."),
+            )
+
+            _listener?.saveChanges(recipe)
+        }
+        _binding.deleteButton.setOnClickListener {
+            _listener?.delete(_recipe.id)
+        }
 
         return view
     }
