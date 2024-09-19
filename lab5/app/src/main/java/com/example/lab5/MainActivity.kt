@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity(),
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.topFragment, formFragment)
-            .remove(supportFragmentManager.findFragmentById(R.id.bottomFragment) ?: return)
+            .replace(R.id.firstFragment, formFragment)
+            .remove(supportFragmentManager.findFragmentById(R.id.secondFragment) ?: return)
             .addToBackStack(null)
             .commit()
     }
@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity(),
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.topFragment, formFragment)
-            .replace(R.id.bottomFragment, listFragment)
+            .replace(R.id.firstFragment, formFragment)
+            .replace(R.id.secondFragment, listFragment)
             .addToBackStack(null)
             .commit()
     }
