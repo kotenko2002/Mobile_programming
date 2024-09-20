@@ -73,3 +73,20 @@ replay_pid*
 /lab5/.externalNativeBuild
 /lab5/.cxx
 /lab5/local.properties
+
+# lab6
+/lab6/*.iml
+/lab6/.gradle
+/lab6/local.properties
+/lab6/.idea/caches
+/lab6/.idea/libraries
+/lab6/.idea/modules.xml
+/lab6/.idea/workspace.xml
+/lab6/.idea/navEditor.xml
+/lab6/.idea/assetWizardSettings.xml
+/lab6/.DS_Store
+/lab6/build
+/lab6/captures
+/lab6/.externalNativeBuild
+/lab6/.cxx
+/lab6/local.properties
