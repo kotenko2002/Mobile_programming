@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Назва" />
+        <EditText
+            android:id="@+id/title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введіть назву рецепту"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Короткий опис" />
+        <EditText
+            android:id="@+id/short_description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введіть короткий опис"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Інгредієнти" />
+        <EditText
+            android:id="@+id/ingredients_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введіть інгредієнти (через кому)"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Інструкції" />
+        <EditText
+            android:id="@+id/instructions_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введіть інструкції (через крапку)"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/add_recipe_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Додати рецепт" />
+
+    </LinearLayout>
+</ScrollView>
