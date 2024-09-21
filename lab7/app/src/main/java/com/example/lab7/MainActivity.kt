@@ -3,24 +3,28 @@ package com.example.lab7
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab7.data.Client
-import com.example.lab7.data.ClientTempData
+import com.example.lab7.data.ClientDatabaseHelper
+import com.example.lab7.data.ClientRepository
 
 class MainActivity : AppCompatActivity(),
     FormFragment.OnDataPassListener,
     ListFragment.OnDataPassListener,
     DetailFragment.OnDataPassListener
 {
-    private val _clients = ClientTempData.clients;
+    private lateinit var clientRepository: ClientRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val dbHelper = ClientDatabaseHelper(this)
+        clientRepository = ClientRepository(dbHelper)
+
         renderFormAndList()
     }
 
     override fun add(newValue: Client) {
-        _clients.add(newValue)
+        clientRepository.addClient(newValue)
         renderFormAndList()
     }
 
@@ -40,24 +44,20 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun saveChanges(client: Client) {
-        val index = _clients.indexOfFirst { it.id == client.id }
-        if (index != -1) {
-            _clients[index] = client
-            renderFormAndList()
-        }
+        clientRepository.updateClient(client)
+        renderFormAndList()
     }
 
     override fun delete(clientId: String) {
-        val clientToRemove = _clients.find { it.id == clientId }
-        if (clientToRemove != null) {
-            _clients.remove(clientToRemove)
-            renderFormAndList()
-        }
+        clientRepository.deleteClient(clientId)
+        renderFormAndList()
     }
 
     private fun renderFormAndList() {
+        val clients = clientRepository.getAllClients()
+
         val formFragment = FormFragment.newInstance()
-        val listFragment = ListFragment.newInstance(_clients)
+        val listFragment = ListFragment.newInstance(ArrayList(clients))
 
         supportFragmentManager
             .beginTransaction()

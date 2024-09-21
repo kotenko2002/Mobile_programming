@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab7.adapters.ClientAdapter
@@ -50,6 +51,9 @@ class ListFragment : Fragment() {
         recyclerView.adapter = ClientAdapter(_clients) { client ->
             _listener?.openDetailFragment(client)
         }
+
+        val itemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(itemDecoration)
 
         return view
     }
