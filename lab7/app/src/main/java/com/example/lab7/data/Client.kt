@@ -25,6 +25,15 @@ data class Client(
     ) {
     }
 
+    val ageCategory: String
+        get() = when {
+            age < 18 -> "Under 18"
+            age in 18..25 -> "18-25"
+            age in 26..35 -> "26-35"
+            age in 36..45 -> "36-45"
+            else -> "46+"
+        }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(firstName)
