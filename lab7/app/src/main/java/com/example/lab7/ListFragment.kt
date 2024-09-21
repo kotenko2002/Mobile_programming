@@ -8,16 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lab7.adapters.RecipeAdapter
+import com.example.lab7.adapters.ClientAdapter
+import com.example.lab7.data.Client
 import com.example.lab7.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
     private lateinit var _binding: FragmentListBinding
     private var _listener: OnDataPassListener? = null
-    private lateinit var _recipes: ArrayList<Recipe>
+    private lateinit var _clients: ArrayList<Client>
 
     interface OnDataPassListener {
-        fun openDetailFragment(recipe: Recipe)
+        fun openDetailFragment(client: Client)
     }
 
     override fun onAttach(context: Context) {
@@ -33,7 +34,7 @@ class ListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            _recipes = it.getParcelableArrayList<Recipe>(ARG_RECIPES) ?: ArrayList()
+            _clients = it.getParcelableArrayList<Client>(ARG_CLIENTS) ?: ArrayList()
         }
     }
 
@@ -46,8 +47,8 @@ class ListFragment : Fragment() {
 
         val recyclerView: RecyclerView = _binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = RecipeAdapter(_recipes) { recipe ->
-            _listener?.openDetailFragment(recipe)
+        recyclerView.adapter = ClientAdapter(_clients) { client ->
+            _listener?.openDetailFragment(client)
         }
 
         return view
@@ -59,12 +60,12 @@ class ListFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_RECIPES = "recipes"
+        private const val ARG_CLIENTS = "clients"
 
-        fun newInstance(stringList: ArrayList<Recipe>): ListFragment {
+        fun newInstance(stringList: ArrayList<Client>): ListFragment {
             val fragment = ListFragment()
             val args = Bundle()
-            args.putParcelableArrayList(ARG_RECIPES, stringList)
+            args.putParcelableArrayList(ARG_CLIENTS, stringList)
             fragment.arguments = args
             return fragment
         }

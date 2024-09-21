@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.lab7.data.Client
 import com.example.lab7.databinding.FragmentFormBinding
 import java.util.UUID
 
@@ -14,7 +15,7 @@ class FormFragment : Fragment() {
     private var _listener: OnDataPassListener? = null
 
     interface OnDataPassListener {
-        fun add(newValue: Recipe)
+        fun add(newValue: Client)
     }
 
     override fun onAttach(context: Context) {
@@ -37,16 +38,19 @@ class FormFragment : Fragment() {
         _binding = FragmentFormBinding.inflate(inflater)
         val view = _binding.root
 
-        _binding.addRecipeButton.setOnClickListener {
-            val recipe = Recipe(
+        _binding.addClientButton.setOnClickListener {
+            val client = Client(
                 id = UUID.randomUUID().toString(),
-                title = _binding.titleInput.text.toString(),
-                shortDescription = _binding.shortDescriptionInput.text.toString(),
-                ingredients = _binding.ingredientsInput.text.split(","),
-                instructions = _binding.instructionsInput.text.split("."),
+                firstName = _binding.firstNameInput.text.toString(),
+                lastName = _binding.lastNameInput.text.toString(),
+                email = _binding.emailInput.text.toString(),
+                age = _binding.ageInput.text.toString().toIntOrNull() ?: 0,
+                gender = _binding.genderInput.text.toString(),
+                schedule = _binding.scheduleInput.text.toString(),
+                contactInfo = _binding.contactInfoInput.text.toString()
             )
 
-            _listener?.add(recipe)
+            _listener?.add(client)
         }
 
         return view

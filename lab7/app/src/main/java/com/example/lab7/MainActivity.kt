@@ -2,13 +2,15 @@ package com.example.lab7
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lab7.data.Client
+import com.example.lab7.data.ClientTempData
 
 class MainActivity : AppCompatActivity(),
     FormFragment.OnDataPassListener,
     ListFragment.OnDataPassListener,
     DetailFragment.OnDataPassListener
 {
-    private val _recipes = RecipeData.recipes
+    private val _clients = ClientTempData.clients;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,13 +19,13 @@ class MainActivity : AppCompatActivity(),
         renderFormAndList()
     }
 
-    override fun add(newValue: Recipe) {
-        _recipes.add(newValue)
+    override fun add(newValue: Client) {
+        _clients.add(newValue)
         renderFormAndList()
     }
 
-    override fun openDetailFragment(recipe: Recipe) {
-        val formFragment = DetailFragment.newInstance(recipe)
+    override fun openDetailFragment(client: Client) {
+        val formFragment = DetailFragment.newInstance(client)
 
         supportFragmentManager
             .beginTransaction()
@@ -37,25 +39,25 @@ class MainActivity : AppCompatActivity(),
         supportFragmentManager.popBackStack()
     }
 
-    override fun saveChanges(recipe: Recipe) {
-        val index = _recipes.indexOfFirst { it.id == recipe.id }
+    override fun saveChanges(client: Client) {
+        val index = _clients.indexOfFirst { it.id == client.id }
         if (index != -1) {
-            _recipes[index] = recipe
+            _clients[index] = client
             renderFormAndList()
         }
     }
 
-    override fun delete(recipeId: String) {
-        val recipeToRemove = _recipes.find { it.id == recipeId }
-        if (recipeToRemove != null) {
-            _recipes.remove(recipeToRemove)
+    override fun delete(clientId: String) {
+        val clientToRemove = _clients.find { it.id == clientId }
+        if (clientToRemove != null) {
+            _clients.remove(clientToRemove)
             renderFormAndList()
         }
     }
 
     private fun renderFormAndList() {
         val formFragment = FormFragment.newInstance()
-        val listFragment = ListFragment.newInstance(_recipes)
+        val listFragment = ListFragment.newInstance(_clients)
 
         supportFragmentManager
             .beginTransaction()

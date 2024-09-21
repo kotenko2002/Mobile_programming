@@ -6,17 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.lab7.data.Client
 import com.example.lab7.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
     private lateinit var _binding: FragmentDetailBinding
     private var _listener: OnDataPassListener? = null
-    private lateinit var _recipe: Recipe
+    private lateinit var _client: Client
 
     interface OnDataPassListener {
         fun back()
-        fun saveChanges(recipe: Recipe)
-        fun delete(recipeId: String)
+        fun saveChanges(client: Client)
+        fun delete(clientId: String)
     }
 
     override fun onAttach(context: Context) {
@@ -32,7 +33,7 @@ class DetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            _recipe = it.getParcelable(ARG_RECIPE) ?: Recipe()
+            _client = it.getParcelable(ARG_CLIENT) ?: Client()
         }
     }
 
@@ -43,27 +44,34 @@ class DetailFragment : Fragment() {
         _binding = FragmentDetailBinding.inflate(inflater)
         val view = _binding.root
 
-        _binding.titleInput.setText(_recipe.title)
-        _binding.shortDescriptionInput.setText(_recipe.shortDescription)
-        _binding.ingredientsInput.setText(_recipe.ingredients.joinToString(separator = ","))
-        _binding.instructionsInput.setText(_recipe.instructions.joinToString(separator = ","))
+        _binding.firstNameInput.setText(_client.firstName)
+        _binding.lastNameInput.setText(_client.lastName)
+        _binding.emailInput.setText(_client.email)
+        _binding.ageInput.setText(_client.age.toString())
+        _binding.genderInput.setText(_client.gender)
+        _binding.scheduleInput.setText(_client.schedule)
+        _binding.contactInfoInput.setText(_client.contactInfo)
 
         _binding.backButton.setOnClickListener {
             _listener?.back()
         }
+
         _binding.saveChangesButton.setOnClickListener {
-            val recipe = Recipe(
-                id = _recipe.id,
-                title = _binding.titleInput.text.toString(),
-                shortDescription = _binding.shortDescriptionInput.text.toString(),
-                ingredients = _binding.ingredientsInput.text.split(","),
-                instructions = _binding.instructionsInput.text.split("."),
+            val client = Client(
+                id = _client.id,
+                firstName = _binding.firstNameInput.text.toString(),
+                lastName = _binding.lastNameInput.text.toString(),
+                email = _binding.emailInput.text.toString(),
+                age = _binding.ageInput.text.toString().toIntOrNull() ?: 0,
+                gender = _binding.genderInput.text.toString(),
+                schedule = _binding.scheduleInput.text.toString(),
+                contactInfo = _binding.contactInfoInput.text.toString()
             )
 
-            _listener?.saveChanges(recipe)
+            _listener?.saveChanges(client)
         }
         _binding.deleteButton.setOnClickListener {
-            _listener?.delete(_recipe.id)
+            _listener?.delete(_client.id)
         }
 
         return view
@@ -75,12 +83,12 @@ class DetailFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_RECIPE = "recipe"
+        private const val ARG_CLIENT = "client"
 
-        fun newInstance(recipe: Recipe): DetailFragment {
+        fun newInstance(client: Client): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
-            args.putParcelable(ARG_RECIPE, recipe)
+            args.putParcelable(ARG_CLIENT, client)
             fragment.arguments = args
             return fragment
         }
