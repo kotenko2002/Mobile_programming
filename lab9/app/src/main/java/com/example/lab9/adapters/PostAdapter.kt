@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lab9.R
 import com.example.lab9.models.DbPost
 
-class PostAdapter(private val posts: List<DbPost>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+class PostAdapter(private var posts: List<DbPost>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
@@ -27,5 +27,10 @@ class PostAdapter(private val posts: List<DbPost>) : RecyclerView.Adapter<PostAd
         fun bind(post: DbPost) {
             titleTextView.text = post.title
         }
+    }
+
+    fun updatePosts(newPosts: List<DbPost>) {
+        posts = newPosts
+        notifyDataSetChanged()
     }
 }
