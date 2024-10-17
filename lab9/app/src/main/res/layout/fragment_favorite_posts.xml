@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Контейнер для AddPostFormFragment -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Тут буде контент першої таби"
-        android:layout_gravity="center" />
+        android:layout_gravity="top" />
 
 </FrameLayout>
