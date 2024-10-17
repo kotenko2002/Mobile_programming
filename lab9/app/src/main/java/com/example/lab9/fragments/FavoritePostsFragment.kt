@@ -18,9 +18,14 @@ class FavoritePostsFragment : Fragment() {
     ): View? {
         _binding = FragmentFavoritePostsBinding.inflate(inflater)
 
-        // Додати AddPostFormFragment у FavoritePostsFragment
+        // Додати AddPostFormFragment
         childFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainer.id, AddPostFormFragment())
+            .replace(binding.addPostFormContainer.id, AddPostFormFragment())
+            .commit()
+
+        // Додати PostListFragment
+        childFragmentManager.beginTransaction()
+            .replace(binding.postListContainer.id, PostListFragment())
             .commit()
 
         return _binding.root

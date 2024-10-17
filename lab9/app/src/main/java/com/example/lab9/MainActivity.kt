@@ -6,7 +6,6 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab9.databinding.ActivityMainBinding
-import com.example.lab9.fragments.TestFragment
 import com.example.lab9.api.PostViewModel
 import com.example.lab9.fragments.PostsFragment
 
