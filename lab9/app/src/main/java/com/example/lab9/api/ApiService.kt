@@ -1,5 +1,6 @@
-package com.example.lab9.models
+package com.example.lab9.api
 
+import com.example.lab9.models.ApiPost
 import retrofit2.http.GET
 import retrofit2.http.Query
 
