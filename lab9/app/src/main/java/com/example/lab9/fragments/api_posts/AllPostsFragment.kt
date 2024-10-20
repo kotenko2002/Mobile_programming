@@ -1,5 +1,6 @@
 package com.example.lab9.fragments.api_posts
 
+import DbPostViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,15 @@ import com.example.lab9.R
 import com.example.lab9.adapters.ApiPostAdapter
 import com.example.lab9.api.PostViewModel
 import com.example.lab9.databinding.FragmentAllPostsBinding
+import com.example.lab9.db.PostDatabaseHelper
+import com.example.lab9.db.PostRepository
 
 class AllPostsFragment : Fragment() {
     private lateinit var _binding: FragmentAllPostsBinding
     private val postViewModel: PostViewModel by activityViewModels()
+    private val dbPostViewModel: DbPostViewModel by activityViewModels()
+
+    private lateinit var postRepository: PostRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,16 +30,19 @@ class AllPostsFragment : Fragment() {
     ): View? {
         _binding = FragmentAllPostsBinding.inflate(inflater)
 
+        val dbHelper = PostDatabaseHelper(requireContext())
+        postRepository = PostRepository(dbHelper)
+
         val recyclerView = _binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val initialAdapter = ApiPostAdapter(emptyList())
+        val initialAdapter = ApiPostAdapter(emptyList(), dbPostViewModel, postRepository)
         recyclerView.adapter = initialAdapter
 
         addPaginationButtons()
 
         postViewModel.posts.observe(viewLifecycleOwner) { posts ->
-            recyclerView.adapter = ApiPostAdapter(posts)
+            recyclerView.adapter = ApiPostAdapter(posts, dbPostViewModel, postRepository)
         }
 
         postViewModel.getPosts(0)
