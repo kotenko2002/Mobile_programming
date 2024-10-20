@@ -3,7 +3,6 @@ package com.example.lab9
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab9.databinding.ActivityMainBinding
@@ -24,23 +23,11 @@ class MainActivity : AppCompatActivity(), PostListFragment.OnDataPassListener {
 
         initGlobalLoader();
 
-        //val fetchDataButton = findViewById<Button>(R.id.fetchDataButton)
-
-        //postViewModel.posts.observe(this) { posts ->
-            //recyclerView.adapter = PostAdapter(posts)
-        //}
-
-        //fetchDataButton.setOnClickListener {
-            //postViewModel.getPosts(1)
-        //}
-
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, PostsFragment())
                 .commit()
         }
-
-        //postViewModel.getPosts(1)
     }
 
     private fun initGlobalLoader() {

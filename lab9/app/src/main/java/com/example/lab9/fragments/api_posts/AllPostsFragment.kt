@@ -1,6 +1,7 @@
 package com.example.lab9.fragments.api_posts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lab9.R
+import com.example.lab9.adapters.PostAdapter
 import com.example.lab9.api.PostViewModel
 import com.example.lab9.databinding.FragmentAllPostsBinding
 
@@ -22,6 +25,25 @@ class AllPostsFragment : Fragment() {
     ): View? {
         _binding = FragmentAllPostsBinding.inflate(inflater)
 
+        val recyclerView = _binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val initialAdapter = PostAdapter(emptyList())
+        recyclerView.adapter = initialAdapter
+
+        addPaginationButtons()
+
+        postViewModel.posts.observe(viewLifecycleOwner) { posts ->
+            recyclerView.adapter = PostAdapter(posts)
+        }
+
+        postViewModel.getPosts(0)
+
+        return _binding.root
+    }
+
+
+    private fun addPaginationButtons() {
         val paginationLayout: LinearLayout = _binding.root.findViewById(R.id.pagination_buttons)
 
         for (i in 0..9) {
@@ -45,7 +67,5 @@ class AllPostsFragment : Fragment() {
 
             paginationLayout.addView(fetchDataButton)
         }
-
-        return _binding.root
     }
 }

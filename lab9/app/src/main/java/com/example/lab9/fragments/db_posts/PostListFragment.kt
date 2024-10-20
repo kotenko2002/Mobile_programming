@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab9.R
-import com.example.lab9.adapters.PostAdapter
+import com.example.lab9.adapters.FavoritePostAdapter
 import com.example.lab9.db.PostDatabaseHelper
 import com.example.lab9.db.PostRepository
 import com.example.lab9.models.DbPost
@@ -19,7 +19,7 @@ import com.example.lab9.models.DbPost
 class PostListFragment : Fragment() {
     private var _listener: OnDataPassListener? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var postAdapter: PostAdapter
+    private lateinit var postAdapter: FavoritePostAdapter
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     interface OnDataPassListener {
@@ -48,7 +48,7 @@ class PostListFragment : Fragment() {
         val postRepository = PostRepository(dbHelper)
 
         val posts = postRepository.getAllPosts()
-        postAdapter = PostAdapter(posts) { post ->
+        postAdapter = FavoritePostAdapter(posts) { post ->
             _listener?.openDetailPost(post)
         }
 
