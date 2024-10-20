@@ -1,6 +1,6 @@
 package com.example.lab9.fragments.db_posts
 
-import SharedViewModel
+import DbPostViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +19,7 @@ class AddPostFormFragment : Fragment() {
     private var _binding: FragmentAddPostFormBinding? = null
     private val binding get() = _binding!!
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val dbPostViewModel: DbPostViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +42,7 @@ class AddPostFormFragment : Fragment() {
                 binding.inputTitle.text.clear()
                 binding.inputBody.text.clear()
 
-                sharedViewModel.addNewPost(newPost)
+                dbPostViewModel.addNewPost(newPost)
             } else {
                 Toast.makeText(requireContext(), "Заповніть всі поля", Toast.LENGTH_SHORT).show()
             }

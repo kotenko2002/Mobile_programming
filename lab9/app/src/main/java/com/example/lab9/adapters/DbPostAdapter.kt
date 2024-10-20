@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lab9.R
 import com.example.lab9.models.DbPost
 
-class FavoritePostAdapter(private var posts: List<DbPost>, private val onItemClick: (DbPost) -> Unit)
-    : RecyclerView.Adapter<FavoritePostAdapter.PostViewHolder>()
+class DbPostAdapter(private var posts: List<DbPost>, private val onItemClick: (DbPost) -> Unit)
+    : RecyclerView.Adapter<DbPostAdapter.PostViewHolder>()
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {

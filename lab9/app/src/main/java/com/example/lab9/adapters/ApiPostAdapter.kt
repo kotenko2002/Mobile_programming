@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lab9.R
 import com.example.lab9.models.ApiPost
 
-class PostAdapter(private val posts: List<ApiPost>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+class ApiPostAdapter(private val posts: List<ApiPost>) : RecyclerView.Adapter<ApiPostAdapter.PostViewHolder>() {
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.post_title)

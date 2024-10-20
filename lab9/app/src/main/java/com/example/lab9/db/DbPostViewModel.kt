@@ -3,7 +3,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lab9.models.DbPost
 
-class SharedViewModel : ViewModel() {
+class DbPostViewModel : ViewModel() {
     private val _newPost = MutableLiveData<DbPost>()
     val newPost: LiveData<DbPost> get() = _newPost
 

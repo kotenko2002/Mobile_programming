@@ -1,6 +1,6 @@
 package com.example.lab9.fragments.db_posts
 
-import SharedViewModel
+import DbPostViewModel
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab9.R
-import com.example.lab9.adapters.FavoritePostAdapter
+import com.example.lab9.adapters.DbPostAdapter
 import com.example.lab9.db.PostDatabaseHelper
 import com.example.lab9.db.PostRepository
 import com.example.lab9.models.DbPost
@@ -19,8 +19,8 @@ import com.example.lab9.models.DbPost
 class PostListFragment : Fragment() {
     private var _listener: OnDataPassListener? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var postAdapter: FavoritePostAdapter
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var postAdapter: DbPostAdapter
+    private val dbPostViewModel: DbPostViewModel by activityViewModels()
 
     interface OnDataPassListener {
         fun openDetailPost(post: DbPost)
@@ -48,13 +48,13 @@ class PostListFragment : Fragment() {
         val postRepository = PostRepository(dbHelper)
 
         val posts = postRepository.getAllPosts()
-        postAdapter = FavoritePostAdapter(posts) { post ->
+        postAdapter = DbPostAdapter(posts) { post ->
             _listener?.openDetailPost(post)
         }
 
         recyclerView.adapter = postAdapter
 
-        sharedViewModel.newPost.observe(viewLifecycleOwner) { newPost ->
+        dbPostViewModel.newPost.observe(viewLifecycleOwner) { newPost ->
             if (newPost != null) {
                 val updatedPosts = postRepository.getAllPosts()
                 postAdapter.updatePosts(updatedPosts)
