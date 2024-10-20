@@ -1,6 +1,7 @@
-package com.example.lab9.fragments
+package com.example.lab9.fragments.db_posts
 
 import SharedViewModel
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +14,26 @@ import com.example.lab9.R
 import com.example.lab9.adapters.PostAdapter
 import com.example.lab9.db.PostDatabaseHelper
 import com.example.lab9.db.PostRepository
+import com.example.lab9.models.DbPost
 
 class PostListFragment : Fragment() {
-
+    private var _listener: OnDataPassListener? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var postAdapter: PostAdapter
     private val sharedViewModel: SharedViewModel by activityViewModels()
+
+    interface OnDataPassListener {
+        fun openDetailPost(post: DbPost)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnDataPassListener) {
+            _listener = context
+        } else {
+            throw RuntimeException("$context must implement OnDataPassListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,15 +47,15 @@ class PostListFragment : Fragment() {
         val dbHelper = PostDatabaseHelper(requireContext())
         val postRepository = PostRepository(dbHelper)
 
-        // Завантажити початковий список постів
         val posts = postRepository.getAllPosts()
-        postAdapter = PostAdapter(posts)
+        postAdapter = PostAdapter(posts) { post ->
+            _listener?.openDetailPost(post)
+        }
+
         recyclerView.adapter = postAdapter
 
-        // Слухати зміни в SharedViewModel і оновлювати список постів
         sharedViewModel.newPost.observe(viewLifecycleOwner) { newPost ->
             if (newPost != null) {
-                // Оновити список постів з бази даних після додавання нового поста
                 val updatedPosts = postRepository.getAllPosts()
                 postAdapter.updatePosts(updatedPosts)
             }
@@ -48,4 +63,10 @@ class PostListFragment : Fragment() {
 
         return view
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        _listener = null
+    }
+
 }

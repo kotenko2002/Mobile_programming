@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lab9.databinding.FragmentPostsBinding
+import com.example.lab9.fragments.api_posts.AllPostsFragment
+import com.example.lab9.fragments.db_posts.FavoritePostsFragment
 
 class PostsFragment : Fragment() {
     private lateinit var _binding: FragmentPostsBinding

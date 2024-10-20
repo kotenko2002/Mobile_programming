@@ -1,4 +1,4 @@
-package com.example.lab9.fragments
+package com.example.lab9.fragments.db_posts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,12 +18,10 @@ class FavoritePostsFragment : Fragment() {
     ): View? {
         _binding = FragmentFavoritePostsBinding.inflate(inflater)
 
-        // Додати AddPostFormFragment
         childFragmentManager.beginTransaction()
             .replace(binding.addPostFormContainer.id, AddPostFormFragment())
             .commit()
 
-        // Додати PostListFragment
         childFragmentManager.beginTransaction()
             .replace(binding.postListContainer.id, PostListFragment())
             .commit()

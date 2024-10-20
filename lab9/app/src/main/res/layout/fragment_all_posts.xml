@@ -9,4 +9,13 @@
         android:text="Тут буде контент другої таби"
         android:layout_gravity="center" />
 
+    <LinearLayout
+        android:id="@+id/pagination_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp">
+    </LinearLayout>
+
 </FrameLayout>

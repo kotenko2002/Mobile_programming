@@ -1,5 +1,6 @@
 package com.example.lab9.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lab9.R
 import com.example.lab9.models.DbPost
 
-class PostAdapter(private var posts: List<DbPost>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+class PostAdapter(private var posts: List<DbPost>, private val onItemClick: (DbPost) -> Unit)
+    : RecyclerView.Adapter<PostAdapter.PostViewHolder>()
+{
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
@@ -21,11 +24,13 @@ class PostAdapter(private var posts: List<DbPost>) : RecyclerView.Adapter<PostAd
 
     override fun getItemCount(): Int = posts.size
 
-    class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.postTitleTextView)
 
         fun bind(post: DbPost) {
             titleTextView.text = post.title
+
+            itemView.setOnClickListener { onItemClick(post) }
         }
     }
 

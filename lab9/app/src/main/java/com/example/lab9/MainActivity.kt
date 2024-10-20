@@ -1,15 +1,18 @@
 package com.example.lab9
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab9.databinding.ActivityMainBinding
 import com.example.lab9.api.PostViewModel
+import com.example.lab9.fragments.db_posts.PostListFragment
 import com.example.lab9.fragments.PostsFragment
+import com.example.lab9.models.DbPost
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PostListFragment.OnDataPassListener {
     private lateinit var _binding: ActivityMainBinding
     private val postViewModel: PostViewModel by viewModels()
 
@@ -20,18 +23,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(_binding.root)
 
         initGlobalLoader();
-        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        //recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val fetchDataButton = findViewById<Button>(R.id.fetchDataButton)
+        //val fetchDataButton = findViewById<Button>(R.id.fetchDataButton)
 
-        postViewModel.posts.observe(this) { posts ->
+        //postViewModel.posts.observe(this) { posts ->
             //recyclerView.adapter = PostAdapter(posts)
-        }
+        //}
 
-        fetchDataButton.setOnClickListener {
-            postViewModel.getPosts()
-        }
+        //fetchDataButton.setOnClickListener {
+            //postViewModel.getPosts(1)
+        //}
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        postViewModel.getPosts()
+        //postViewModel.getPosts(1)
     }
 
     private fun initGlobalLoader() {
@@ -47,5 +48,9 @@ class MainActivity : AppCompatActivity() {
             _binding.dimView.visibility = if (isLoading) View.VISIBLE else View.GONE
             _binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
+    }
+
+    override fun openDetailPost(post: DbPost) {
+        Log.d("PostAdapter", "ID: ${post.id}")
     }
 }

@@ -23,14 +23,14 @@ class PostViewModel : ViewModel() {
 
     private val postApiService: ApiService = retrofit.create(ApiService::class.java)
 
-    fun getPosts() {
+    fun getPosts(page: Int) {
         _loading.value = true
         viewModelScope.launch {
             try {
-                val response = postApiService.getPosts()
+                val response = postApiService.getPosts(page = page)
                 _posts.value = response;
 
-                Thread.sleep(2000)
+                Thread.sleep(1000)
                 println("Got " + _posts.value?.size + "posts")
             } catch (e: Exception) {
                 println("error")

@@ -1,4 +1,4 @@
-package com.example.lab9.fragments
+package com.example.lab9.fragments.db_posts
 
 import SharedViewModel
 import android.os.Bundle
@@ -42,7 +42,6 @@ class AddPostFormFragment : Fragment() {
                 binding.inputTitle.text.clear()
                 binding.inputBody.text.clear()
 
-                // Передати новий пост у ViewModel
                 sharedViewModel.addNewPost(newPost)
             } else {
                 Toast.makeText(requireContext(), "Заповніть всі поля", Toast.LENGTH_SHORT).show()

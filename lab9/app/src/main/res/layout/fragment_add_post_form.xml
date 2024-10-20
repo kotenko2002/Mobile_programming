@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".fragments.AddPostFormFragment">
+    tools:context=".fragments.db_posts.AddPostFormFragment">
 
-    <!-- Лейбл для заголовка -->
     <TextView
         android:id="@+id/titleLabel"
         android:layout_width="wrap_content"
@@ -19,18 +18,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp" />
 
-    <!-- Поле вводу заголовка -->
     <EditText
         android:id="@+id/inputTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Введіть заголовок"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/titleLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
-    <!-- Лейбл для тексту -->
     <TextView
         android:id="@+id/bodyLabel"
         android:layout_width="wrap_content"
@@ -42,18 +40,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp" />
 
-    <!-- Поле вводу тексту -->
     <EditText
         android:id="@+id/inputBody"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Введіть текст"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/bodyLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
-    <!-- Кнопка для додавання посту -->
     <Button
         android:id="@+id/btnAddPost"
         android:layout_width="0dp"
