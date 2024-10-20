@@ -10,6 +10,8 @@ import com.example.lab9.fragments.db_posts.PostListFragment
 import com.example.lab9.fragments.PostsFragment
 import com.example.lab9.fragments.db_posts.EditPostFragment
 import com.example.lab9.models.DbPost
+import android.widget.Toast
+import com.example.lab9.utils.isNetworkAvailable
 
 class MainActivity : AppCompatActivity(),
     PostListFragment.OnDataPassListener,
@@ -24,7 +26,8 @@ class MainActivity : AppCompatActivity(),
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
 
-        initGlobalLoader();
+        initGlobalLoader()
+        initNetworkConnectionChecker()
 
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -38,6 +41,12 @@ class MainActivity : AppCompatActivity(),
         postViewModel.loading.observe(this) { isLoading ->
             _binding.dimView.visibility = if (isLoading) View.VISIBLE else View.GONE
             _binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun initNetworkConnectionChecker() {
+        if (!isNetworkAvailable(this)) {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -59,3 +68,4 @@ class MainActivity : AppCompatActivity(),
         supportFragmentManager.popBackStack()
     }
 }
+
