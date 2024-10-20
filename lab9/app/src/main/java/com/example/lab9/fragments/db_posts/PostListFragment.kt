@@ -54,11 +54,9 @@ class PostListFragment : Fragment() {
 
         recyclerView.adapter = postAdapter
 
-        dbPostViewModel.newPost.observe(viewLifecycleOwner) { newPost ->
-            if (newPost != null) {
-                val updatedPosts = postRepository.getAllPosts()
-                postAdapter.updatePosts(updatedPosts)
-            }
+        dbPostViewModel.postsChanged.observe(viewLifecycleOwner) {
+            val updatedPosts = postRepository.getAllPosts()
+            postAdapter.updatePosts(updatedPosts)
         }
 
         return view

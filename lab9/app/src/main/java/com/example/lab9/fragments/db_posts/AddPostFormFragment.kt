@@ -42,7 +42,7 @@ class AddPostFormFragment : Fragment() {
                 binding.inputTitle.text.clear()
                 binding.inputBody.text.clear()
 
-                dbPostViewModel.addNewPost(newPost)
+                dbPostViewModel.notifyChange()
             } else {
                 Toast.makeText(requireContext(), "Заповніть всі поля", Toast.LENGTH_SHORT).show()
             }

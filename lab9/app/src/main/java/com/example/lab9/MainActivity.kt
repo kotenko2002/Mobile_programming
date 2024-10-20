@@ -1,7 +1,6 @@
 package com.example.lab9
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +8,13 @@ import com.example.lab9.databinding.ActivityMainBinding
 import com.example.lab9.api.PostViewModel
 import com.example.lab9.fragments.db_posts.PostListFragment
 import com.example.lab9.fragments.PostsFragment
+import com.example.lab9.fragments.db_posts.EditPostFragment
 import com.example.lab9.models.DbPost
 
-class MainActivity : AppCompatActivity(), PostListFragment.OnDataPassListener {
+class MainActivity : AppCompatActivity(),
+    PostListFragment.OnDataPassListener,
+    EditPostFragment.OnDataPassListener
+{
     private lateinit var _binding: ActivityMainBinding
     private val postViewModel: PostViewModel by viewModels()
 
@@ -24,7 +27,8 @@ class MainActivity : AppCompatActivity(), PostListFragment.OnDataPassListener {
         initGlobalLoader();
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
+            supportFragmentManager
+                .beginTransaction()
                 .replace(R.id.fragmentContainer, PostsFragment())
                 .commit()
         }
@@ -38,6 +42,20 @@ class MainActivity : AppCompatActivity(), PostListFragment.OnDataPassListener {
     }
 
     override fun openDetailPost(post: DbPost) {
-        Log.d("PostAdapter", "ID: ${post.id}")
+        val fragment = EditPostFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("post", post)
+            }
+        }
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun back() {
+        supportFragmentManager.popBackStack()
     }
 }

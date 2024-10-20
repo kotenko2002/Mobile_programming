@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import com.example.lab9.models.DbPost
 
 class DbPostViewModel : ViewModel() {
-    private val _newPost = MutableLiveData<DbPost>()
-    val newPost: LiveData<DbPost> get() = _newPost
+    private val _postsChanged = MutableLiveData<Unit>()
+    val postsChanged: LiveData<Unit> get() = _postsChanged
 
-    fun addNewPost(post: DbPost) {
-        _newPost.value = post
+    fun notifyChange() {
+        _postsChanged.value = Unit
     }
 }

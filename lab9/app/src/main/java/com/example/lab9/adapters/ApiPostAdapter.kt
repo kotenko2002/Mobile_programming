@@ -48,7 +48,7 @@ class ApiPostAdapter(
 
                 postRepository.addPost(newPost)
 
-                dbPostViewModel.addNewPost(newPost)
+                dbPostViewModel.notifyChange()
                 Toast.makeText(itemView.context, "Запис додано до улюблених постів", Toast.LENGTH_SHORT).show()
             }
         }
