@@ -17,7 +17,7 @@ import com.example.lab9.databinding.FragmentAllPostsBinding
 import com.example.lab9.db.PostDatabaseHelper
 import com.example.lab9.db.PostRepository
 
-class AllPostsFragment : Fragment() {
+class ApiPostsFragment : Fragment() {
     private lateinit var _binding: FragmentAllPostsBinding
     private val postViewModel: PostViewModel by activityViewModels()
     private val dbPostViewModel: DbPostViewModel by activityViewModels()

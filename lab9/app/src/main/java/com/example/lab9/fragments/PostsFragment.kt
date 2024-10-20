@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lab9.databinding.FragmentPostsBinding
-import com.example.lab9.fragments.api_posts.AllPostsFragment
-import com.example.lab9.fragments.db_posts.FavoritePostsFragment
+import com.example.lab9.fragments.api_posts.ApiPostsFragment
+import com.example.lab9.fragments.db_posts.DbPostsFragment
 
 class PostsFragment : Fragment() {
     private lateinit var _binding: FragmentPostsBinding
@@ -23,8 +23,8 @@ class PostsFragment : Fragment() {
         _binding.viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> FavoritePostsFragment()
-                    else -> AllPostsFragment()
+                    0 -> DbPostsFragment()
+                    else -> ApiPostsFragment()
                 }
             }
 
