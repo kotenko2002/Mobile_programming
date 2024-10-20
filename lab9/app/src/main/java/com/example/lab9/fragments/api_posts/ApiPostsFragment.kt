@@ -45,8 +45,6 @@ class ApiPostsFragment : Fragment() {
             recyclerView.adapter = ApiPostAdapter(posts, dbPostViewModel, postRepository)
         }
 
-        postViewModel.getPosts(0)
-
         return _binding.root
     }
 
