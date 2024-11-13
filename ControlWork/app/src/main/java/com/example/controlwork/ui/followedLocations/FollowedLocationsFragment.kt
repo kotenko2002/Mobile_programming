@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.controlwork.databinding.FragmentFollowedLocationsBinding
 
 class FollowedLocationsFragment : Fragment() {
-    private var _binding: FragmentFollowedLocationsBinding? = null
-
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentFollowedLocationsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,17 +21,12 @@ class FollowedLocationsFragment : Fragment() {
             ViewModelProvider(this).get(FollowedLocationsViewModel::class.java)
 
         _binding = FragmentFollowedLocationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val root: View = _binding.root
 
-        val textView: TextView = binding.textFollowedLocations
+        val textView: TextView = _binding.textFollowedLocations
         followedLocationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
