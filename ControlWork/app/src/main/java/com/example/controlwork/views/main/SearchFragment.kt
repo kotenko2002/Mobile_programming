@@ -41,17 +41,22 @@ class SearchFragment : Fragment() {
         _searchViewModel.upsertCity(testCity)
          */
 
+        _searchViewModel.searchCities("z").observe(viewLifecycleOwner) { cities ->
+            Log.d("SearchFragment", "Found cities: $cities")
+        }
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*
         val cityId = 613273
         _searchViewModel.getWeatherDataByCityId(cityId)
         observeWeatherData()
+         */
 
-        observeCities()
+        //observeCities()
     }
 
     private fun observeWeatherData() {
@@ -62,8 +67,9 @@ class SearchFragment : Fragment() {
     private fun observeCities() {
         _searchViewModel.getAllCities().observe(viewLifecycleOwner) { cities ->
             cities.forEach { city ->
-                Log.d("SearchFragment", "City: ${city.name}, Country: ${city.country}")
+                Log.d("SearchFragment", "Id: ${city.id}, City: ${city.name}, Country: ${city.country}")
             }
         }
     }
+
 }

@@ -1,0 +1,52 @@
+[
+    {
+        "id": 613273,
+        "name": "Lebedyn",
+        "state": "",
+        "country": "UA",
+        "coord": {
+            "lon": 34.484901,
+            "lat": 50.585178
+        }
+    },
+    {
+        "id": 618835,
+        "name": "Zhydachiv",
+        "state": "",
+        "country": "UA",
+        "coord": {
+            "lon": 24.14254,
+            "lat": 49.384682
+        }
+    },
+    {
+        "id": 686762,
+        "name": "Ivano-Frankove",
+        "state": "",
+        "country": "UA",
+        "coord": {
+            "lon": 23.73333,
+            "lat": 49.916672
+        }
+    },
+    {
+        "id": 686896,
+        "name": "Zolochiv",
+        "state": "",
+        "country": "UA",
+        "coord": {
+            "lon": 24.89436,
+            "lat": 49.805969
+        }
+    },
+    {
+        "id": 336,
+        "name": "Тест",
+        "state": "",
+        "country": "UA",
+        "coord": {
+            "lon": 24.89436,
+            "lat": 49.805969
+        }
+    }
+]

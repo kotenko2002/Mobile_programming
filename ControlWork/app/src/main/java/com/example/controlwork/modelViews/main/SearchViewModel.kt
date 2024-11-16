@@ -59,4 +59,8 @@ class SearchViewModel @Inject constructor(
     fun getAllCities(): LiveData<List<City>> {
         return cityDao.getAllCities()
     }
+
+    fun searchCities(prefix: String): LiveData<List<City>> {
+        return cityDao.searchCitiesByName(prefix)
+    }
 }
