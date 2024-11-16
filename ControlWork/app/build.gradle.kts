@@ -54,6 +54,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
     // MVVM
     implementation(libs.androidx.lifecycle.livedata.ktx)

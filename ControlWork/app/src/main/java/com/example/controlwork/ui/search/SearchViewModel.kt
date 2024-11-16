@@ -29,7 +29,9 @@ class SearchViewModel @Inject constructor(
     private var _weatherLiveData = MutableLiveData<WeatherData>()
 
     fun getWeatherDataByCityId() {
-        weatherApi.getWeatherDataByCityId().enqueue(object: Callback<WeatherData> {
+        val cityId = 613273
+
+        weatherApi.getWeatherDataByCityId(cityId).enqueue(object: Callback<WeatherData> {
             override fun onResponse(call: Call<WeatherData>, response: Response<WeatherData>) {
                 val data = response.body();
 

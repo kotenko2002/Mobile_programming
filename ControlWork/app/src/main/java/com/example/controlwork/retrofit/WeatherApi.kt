@@ -3,8 +3,11 @@ package com.example.controlwork.retrofit
 import com.example.controlwork.models.weather.WeatherData
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface WeatherApi {
-    @GET("weather?q=London&appid=2426810b71e08dada14309acd9118fa4")
-    fun getWeatherDataByCityId():Call<WeatherData>
+    @GET("weather")
+    fun getWeatherDataByCityId(
+        @Query("id") cityId: Int
+    ): Call<WeatherData>
 }
