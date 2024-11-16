@@ -1,4 +1,4 @@
-package com.example.controlwork.models.weatherData
+package com.example.controlwork.models.shared
 
 data class Coord(
     val lat: Double,

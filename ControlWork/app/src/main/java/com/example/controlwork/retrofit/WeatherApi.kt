@@ -1,6 +1,6 @@
 package com.example.controlwork.retrofit
 
-import com.example.controlwork.models.weatherData.WeatherData
+import com.example.controlwork.models.weather.WeatherData
 import retrofit2.Call
 import retrofit2.http.GET
 

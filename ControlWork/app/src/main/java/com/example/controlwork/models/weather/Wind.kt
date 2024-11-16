@@ -1,4 +1,4 @@
-package com.example.controlwork.models.weatherData
+package com.example.controlwork.models.weather
 
 data class Wind(
     val deg: Int,
