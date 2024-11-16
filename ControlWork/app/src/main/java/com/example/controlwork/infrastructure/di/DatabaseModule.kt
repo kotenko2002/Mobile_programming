@@ -2,7 +2,7 @@ package com.example.controlwork.infrastructure.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.controlwork.infrastructure.db.AppDataBase
+import com.example.controlwork.infrastructure.db.AppDatabase
 import com.example.controlwork.infrastructure.db.CityDao
 import dagger.Module
 import dagger.Provides
@@ -17,16 +17,16 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): AppDataBase {
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
-            AppDataBase::class.java,
+            AppDatabase::class.java,
             "app_database"
         ).build()
     }
 
     @Provides
-    fun provideCityDao(database: AppDataBase): CityDao {
+    fun provideCityDao(database: AppDatabase): CityDao {
         return database.cityDao()
     }
 }

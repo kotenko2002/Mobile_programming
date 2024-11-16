@@ -28,9 +28,7 @@ class SearchViewModel @Inject constructor(
 
     private var _weatherLiveData = MutableLiveData<WeatherData>()
 
-    fun getWeatherDataByCityId() {
-        val cityId = 613273
-
+    fun getWeatherDataByCityId(cityId: Int) {
         weatherApi.getWeatherDataByCityId(cityId).enqueue(object: Callback<WeatherData> {
             override fun onResponse(call: Call<WeatherData>, response: Response<WeatherData>) {
                 val data = response.body();
@@ -56,5 +54,9 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             cityDao.upsertCity(city)
         }
+    }
+
+    fun getAllCities(): LiveData<List<City>> {
+        return cityDao.getAllCities()
     }
 }

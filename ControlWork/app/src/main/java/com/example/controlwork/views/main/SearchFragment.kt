@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.controlwork.databinding.FragmentSearchBinding
-import com.example.controlwork.models.city.City
 import com.example.controlwork.modelViews.main.SearchViewModel
+import com.example.controlwork.models.city.City
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,12 +32,14 @@ class SearchFragment : Fragment() {
             textView.text = it
         }
 
+        /*
         val testCity = City(
-            id = 1,
-            name = "Kyiv",
+            id = 3,
+            name = "Sumy",
             country = "Ukraine"
         )
         _searchViewModel.upsertCity(testCity)
+         */
 
         return root
     }
@@ -45,12 +47,23 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _searchViewModel.getWeatherDataByCityId()
+        val cityId = 613273
+        _searchViewModel.getWeatherDataByCityId(cityId)
         observeWeatherData()
+
+        observeCities()
     }
 
     private fun observeWeatherData() {
         _searchViewModel.observeWeatherLiveData().observe(viewLifecycleOwner
         ) { value -> Log.d("TEST3", value.toString()) }
+    }
+
+    private fun observeCities() {
+        _searchViewModel.getAllCities().observe(viewLifecycleOwner) { cities ->
+            cities.forEach { city ->
+                Log.d("SearchFragment", "City: ${city.name}, Country: ${city.country}")
+            }
+        }
     }
 }
