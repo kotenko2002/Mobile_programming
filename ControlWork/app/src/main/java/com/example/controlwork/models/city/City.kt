@@ -1,11 +1,12 @@
 package com.example.controlwork.models.city
 
-import com.example.controlwork.models.shared.Coord
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "cities")
 data class City(
-    val coord: Coord,
-    val country: String,
+    @PrimaryKey
     val id: Int,
     val name: String,
-    val state: String
+    val country: String,
 )

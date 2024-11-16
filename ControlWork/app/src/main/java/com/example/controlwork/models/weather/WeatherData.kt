@@ -1,7 +1,5 @@
 package com.example.controlwork.models.weather
 
-import com.example.controlwork.models.shared.Coord
-
 data class WeatherData(
     val base: String,
     val clouds: Clouds,
