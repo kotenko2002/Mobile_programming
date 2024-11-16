@@ -1,4 +1,4 @@
-package com.example.controlwork.ui.followedLocations
+package com.example.controlwork.modelViews.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

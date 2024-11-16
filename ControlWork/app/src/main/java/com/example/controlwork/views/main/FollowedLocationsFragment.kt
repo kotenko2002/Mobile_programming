@@ -1,4 +1,4 @@
-package com.example.controlwork.ui.followedLocations
+package com.example.controlwork.views.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.controlwork.databinding.FragmentFollowedLocationsBinding
+import com.example.controlwork.modelViews.main.FollowedLocationsViewModel
 
 class FollowedLocationsFragment : Fragment() {
     private lateinit var _binding: FragmentFollowedLocationsBinding

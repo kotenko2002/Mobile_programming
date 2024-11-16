@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.controlwork.ui.search.SearchFragment"
+        android:name="com.example.controlwork.views.main.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_followed_locations"
-        android:name="com.example.controlwork.ui.followedLocations.FollowedLocationsFragment"
+        android:name="com.example.controlwork.views.main.FollowedLocationsFragment"
         android:label="@string/title_followed_locations"
         tools:layout="@layout/fragment_followed_locations" />
 

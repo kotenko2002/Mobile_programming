@@ -1,4 +1,4 @@
-package com.example.controlwork.ui.search
+package com.example.controlwork.modelViews.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
