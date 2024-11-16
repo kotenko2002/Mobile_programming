@@ -23,5 +23,4 @@ interface CityDao {
 
     @Query("SELECT * FROM cities WHERE name LIKE :prefix || '%' COLLATE NOCASE LIMIT 10")
     fun searchCitiesByName(prefix: String): LiveData<List<City>>
-
 }

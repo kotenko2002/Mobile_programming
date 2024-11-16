@@ -1,5 +1,23 @@
 package com.example.controlwork.modelViews.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import com.example.controlwork.infrastructure.db.CityDao
+import com.example.controlwork.models.city.City
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class SearchViewModel @Inject constructor(
+    private val cityDao: CityDao
+) : ViewModel() {
+
+    fun searchCities(prefix: String): LiveData<List<City>> {
+        return cityDao.searchCitiesByName(prefix)
+    }
+}
+
+/*
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,11 +39,6 @@ class SearchViewModel @Inject constructor(
     private val cityDao: CityDao,
     private val weatherApi: WeatherApi
 ) : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is search Fragment"
-    }
-    val text: LiveData<String> = _text
-
     private var _weatherLiveData = MutableLiveData<WeatherData>()
 
     fun getWeatherDataByCityId(cityId: Int) {
@@ -64,3 +77,4 @@ class SearchViewModel @Inject constructor(
         return cityDao.searchCitiesByName(prefix)
     }
 }
+ */

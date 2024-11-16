@@ -5,6 +5,65 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.controlwork.databinding.FragmentSearchBinding
+import com.example.controlwork.modelViews.main.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class SearchFragment : Fragment() {
+
+    private lateinit var _binding: FragmentSearchBinding
+    private val _searchViewModel: SearchViewModel by viewModels()
+    private lateinit var adapter: CityAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        val root: View = _binding.root
+
+        adapter = CityAdapter { city ->
+            Toast.makeText(requireContext(), "User have chosen option: ${city.id}", Toast.LENGTH_SHORT).show()
+            _binding.citySearchInput.text.clear()
+        }
+
+        _binding.cityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        _binding.cityRecyclerView.adapter = adapter
+
+        _binding.citySearchInput.addTextChangedListener { text ->
+            performSearch(text.toString())
+        }
+
+        return root
+    }
+
+    private fun performSearch(query: String) {
+        if (query.length >= 2) {
+            _searchViewModel.searchCities(query).observe(viewLifecycleOwner) { cities ->
+                Log.d("SearchFragment", "Found cities: $cities")
+                adapter.submitList(cities)
+            }
+        } else {
+            adapter.submitList(emptyList())
+        }
+    }
+}
+
+
+
+/*
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,11 +85,6 @@ class SearchFragment : Fragment() {
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = _binding.root
-
-        val textView: TextView = _binding.textSearch
-        _searchViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         /*
         val testCity = City(
@@ -71,5 +125,5 @@ class SearchFragment : Fragment() {
             }
         }
     }
-
 }
+ */
