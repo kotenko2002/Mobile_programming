@@ -1,4 +1,4 @@
-package com.example.controlwork.retrofit
+package com.example.controlwork.infrastructure.retrofit
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

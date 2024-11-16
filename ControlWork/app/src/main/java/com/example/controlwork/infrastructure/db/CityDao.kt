@@ -1,4 +1,4 @@
-package com.example.controlwork.db
+package com.example.controlwork.infrastructure.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

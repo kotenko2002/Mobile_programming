@@ -1,4 +1,4 @@
-package com.example.controlwork.retrofit
+package com.example.controlwork.infrastructure.retrofit
 
 import com.example.controlwork.models.weather.WeatherData
 import retrofit2.Call

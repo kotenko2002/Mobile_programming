@@ -1,5 +1,7 @@
-package com.example.controlwork.retrofit
+package com.example.controlwork.infrastructure.di
 
+import com.example.controlwork.infrastructure.retrofit.ApiKeyInterceptor
+import com.example.controlwork.infrastructure.retrofit.WeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

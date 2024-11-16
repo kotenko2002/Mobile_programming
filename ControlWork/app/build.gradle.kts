@@ -54,7 +54,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(libs.okhttp)
 
     // MVVM
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -67,6 +67,6 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     // hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

@@ -1,7 +1,9 @@
-package com.example.controlwork.db
+package com.example.controlwork.infrastructure.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.controlwork.infrastructure.db.AppDataBase
+import com.example.controlwork.infrastructure.db.CityDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

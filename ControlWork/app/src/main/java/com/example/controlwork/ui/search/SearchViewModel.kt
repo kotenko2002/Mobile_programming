@@ -9,9 +9,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.lifecycle.viewModelScope
-import com.example.controlwork.db.CityDao
+import com.example.controlwork.infrastructure.db.CityDao
 import com.example.controlwork.models.city.City
-import com.example.controlwork.retrofit.WeatherApi
+import com.example.controlwork.infrastructure.retrofit.WeatherApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
