@@ -9,9 +9,17 @@ import com.example.controlwork.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.lifecycle.viewModelScope
+import com.example.controlwork.db.CityDao
+import com.example.controlwork.models.city.City
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.launch
 
-class SearchViewModel : ViewModel() {
-
+@HiltViewModel
+class SearchViewModel @Inject constructor(
+    private val cityDao: CityDao
+) : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is search Fragment"
     }
@@ -39,5 +47,11 @@ class SearchViewModel : ViewModel() {
 
     fun observeWeatherLiveData():LiveData<WeatherData> {
         return _weatherLiveData;
+    }
+
+    fun upsertCity(city: City) {
+        viewModelScope.launch {
+            cityDao.upsertCity(city)
+        }
     }
 }
