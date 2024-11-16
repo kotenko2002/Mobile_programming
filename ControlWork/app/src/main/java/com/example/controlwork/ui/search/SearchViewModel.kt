@@ -5,20 +5,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.controlwork.models.weather.WeatherData
-import com.example.controlwork.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.lifecycle.viewModelScope
 import com.example.controlwork.db.CityDao
 import com.example.controlwork.models.city.City
+import com.example.controlwork.retrofit.WeatherApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val cityDao: CityDao
+    private val cityDao: CityDao,
+    private val weatherApi: WeatherApi
 ) : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is search Fragment"
@@ -28,7 +29,7 @@ class SearchViewModel @Inject constructor(
     private var _weatherLiveData = MutableLiveData<WeatherData>()
 
     fun getWeatherDataByCityId() {
-        RetrofitInstance.api.getWeatherDataByCityId().enqueue(object: Callback<WeatherData> {
+        weatherApi.getWeatherDataByCityId().enqueue(object: Callback<WeatherData> {
             override fun onResponse(call: Call<WeatherData>, response: Response<WeatherData>) {
                 val data = response.body();
 

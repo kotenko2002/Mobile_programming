@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.controlwork.databinding.FragmentSearchBinding
 import com.example.controlwork.models.city.City
-import com.example.controlwork.models.weather.WeatherData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +26,11 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = _binding.root
 
-        // Виклик методу upsertCity із захардкодженим екземпляром City
+        val textView: TextView = _binding.textSearch
+        _searchViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
+        }
+
         val testCity = City(
             id = 1,
             name = "Kyiv",
@@ -38,6 +39,18 @@ class SearchFragment : Fragment() {
         _searchViewModel.upsertCity(testCity)
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _searchViewModel.getWeatherDataByCityId()
+        observeWeatherData()
+    }
+
+    private fun observeWeatherData() {
+        _searchViewModel.observeWeatherLiveData().observe(viewLifecycleOwner
+        ) { value -> Log.d("TEST3", value.toString()) }
     }
 }
 
