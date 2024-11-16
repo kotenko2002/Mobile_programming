@@ -1,5 +1,6 @@
 package com.example.controlwork.views.main
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ class CityAdapter(private val onCityClick: (City) -> Unit) :
 
     private var cities: List<City> = emptyList()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitList(newCities: List<City>) {
         cities = newCities
         notifyDataSetChanged()
@@ -33,9 +35,27 @@ class CityAdapter(private val onCityClick: (City) -> Unit) :
     class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val cityName: TextView = itemView.findViewById(R.id.cityName)
 
+        @SuppressLint("SetTextI18n")
         fun bind(city: City, onCityClick: (City) -> Unit) {
-            cityName.text = "${city.name} [${city.country}]"
+            cityName.text = "${city.name} ${getCountryFlag(city.country)}"
             itemView.setOnClickListener { onCityClick(city) }
+        }
+
+        private fun getCountryFlag(countryCode: String): String {
+            val upperCaseCode = countryCode.uppercase()
+            if (upperCaseCode.length != 2) {
+                throw IllegalArgumentException("Country code must be a two-letter ISO code.")
+            }
+
+            if (upperCaseCode == "RU") {
+                return "\uD83C\uDFAA"
+            }
+
+            return upperCaseCode.map {
+                    char -> 0x1F1E6 + (char - 'A')
+            }.joinToString("") {
+                String(Character.toChars(it))
+            }
         }
     }
 }
