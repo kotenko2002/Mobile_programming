@@ -14,21 +14,21 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FollowedLocationsFragment : Fragment() {
-    private lateinit var binding: FragmentFollowedLocationsBinding
-    private val followedLocationsViewModel: FollowedLocationsViewModel by viewModels()
+    private lateinit var _binding: FragmentFollowedLocationsBinding
+    private val _followedLocationsViewModel: FollowedLocationsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowedLocationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        _binding = FragmentFollowedLocationsBinding.inflate(inflater, container, false)
+        val root: View = _binding.root
 
-        val recyclerView = binding.recyclerViewFollowedLocations
+        val recyclerView = _binding.recyclerViewFollowedLocations
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        followedLocationsViewModel.getFollowedLocations().observe(viewLifecycleOwner, Observer { locations ->
+        _followedLocationsViewModel.getFollowedLocations().observe(viewLifecycleOwner, Observer { locations ->
             recyclerView.adapter = FollowedLocationsListAdapter(locations)
         })
 

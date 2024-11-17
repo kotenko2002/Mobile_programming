@@ -11,7 +11,7 @@ import com.example.controlwork.infrastructure.utils.TextHelper.Companion.getCoun
 import com.example.controlwork.models.location.Location
 
 class FollowedLocationsListAdapter(
-    private val locations: List<Location>
+    private val _locations: List<Location>
 ) : RecyclerView.Adapter<FollowedLocationsListAdapter.LocationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
@@ -21,10 +21,10 @@ class FollowedLocationsListAdapter(
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        holder.bind(locations[position])
+        holder.bind(_locations[position])
     }
 
-    override fun getItemCount(): Int = locations.size
+    override fun getItemCount(): Int = _locations.size
 
     inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val locationName: TextView = itemView.findViewById(R.id.textViewLocationName)

@@ -13,19 +13,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val locationDao: LocationDao,
-    private val followedLocationDao: FollowedLocationDao
+    private val _locationDao: LocationDao,
+    private val _followedLocationDao: FollowedLocationDao
 ) : ViewModel() {
 
     fun searchLocations(prefix: String): LiveData<List<Location>> {
-        return locationDao.searchLocationsByName(prefix)
+        return _locationDao.searchLocationsByName(prefix)
     }
 
     fun followOnLocation(location: Location) {
         val newFollowedLocation = FollowedLocation(locationId = location.id)
 
         viewModelScope.launch {
-            followedLocationDao.upsertFollowedLocation(newFollowedLocation)
+            _followedLocationDao.upsertFollowedLocation(newFollowedLocation)
         }
     }
 }

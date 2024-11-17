@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FollowedLocationsViewModel @Inject constructor(
-    private val followedLocationDao: FollowedLocationDao
+    private val _followedLocationDao: FollowedLocationDao
 ) : ViewModel() {
     fun getFollowedLocations(): LiveData<List<Location>> {
-        return followedLocationDao.getFollowedLocationsWithNames()
+        return _followedLocationDao.getFollowedLocationsWithNames()
     }
 }

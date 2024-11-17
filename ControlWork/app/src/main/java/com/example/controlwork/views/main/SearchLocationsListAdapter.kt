@@ -10,14 +10,14 @@ import com.example.controlwork.R
 import com.example.controlwork.infrastructure.utils.TextHelper.Companion.getCountryFlag
 import com.example.controlwork.models.location.Location
 
-class SearchLocationsListAdapter(private val onLocationClick: (Location) -> Unit) :
+class SearchLocationsListAdapter(private val _onLocationClick: (Location) -> Unit) :
     RecyclerView.Adapter<SearchLocationsListAdapter.LocationViewHolder>() {
 
-    private var locations: List<Location> = emptyList()
+    private var _locations: List<Location> = emptyList()
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(newLocation: List<Location>) {
-        locations = newLocation
+        _locations = newLocation
         notifyDataSetChanged()
     }
 
@@ -27,11 +27,11 @@ class SearchLocationsListAdapter(private val onLocationClick: (Location) -> Unit
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        val location = locations[position]
-        holder.bind(location, onLocationClick)
+        val location = _locations[position]
+        holder.bind(location, _onLocationClick)
     }
 
-    override fun getItemCount(): Int = locations.size
+    override fun getItemCount(): Int = _locations.size
 
     class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val locationName: TextView = itemView.findViewById(R.id.locationName)

@@ -15,10 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
-
     private lateinit var _binding: FragmentSearchBinding
     private val _searchViewModel: SearchViewModel by viewModels()
-    private lateinit var adapter: SearchLocationsListAdapter
+    private lateinit var _adapter: SearchLocationsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,13 +27,13 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = _binding.root
 
-        adapter = SearchLocationsListAdapter { location ->
+        _adapter = SearchLocationsListAdapter { location ->
             _searchViewModel.followOnLocation(location)
             _binding.locationSearchInput.text.clear()
         }
 
         _binding.locationsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        _binding.locationsRecyclerView.adapter = adapter
+        _binding.locationsRecyclerView.adapter = _adapter
 
         _binding.locationSearchInput.addTextChangedListener { text ->
             performSearch(text.toString())
@@ -47,10 +46,10 @@ class SearchFragment : Fragment() {
         if (query.length >= 2) {
             _searchViewModel.searchLocations(query).observe(viewLifecycleOwner) { locations ->
                 Log.d("SearchFragment", "Found locations: $locations")
-                adapter.submitList(locations)
+                _adapter.submitList(locations)
             }
         } else {
-            adapter.submitList(emptyList())
+            _adapter.submitList(emptyList())
         }
     }
 }
