@@ -6,14 +6,21 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.controlwork.models.location.FollowedLocation
+import com.example.controlwork.models.location.Location
 
 @Dao
 interface FollowedLocationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertFollowedLocation(followedLocation: FollowedLocation)
 
-    @Query("SELECT * FROM followed_locations")
-    fun getAllFollowedLocations(): LiveData<List<FollowedLocation>>
+
+    @Query("""
+        SELECT locations.id, locations.name, locations.country 
+        FROM followed_locations 
+        INNER JOIN locations 
+        ON followed_locations.locationId = locations.id
+    """)
+    fun getFollowedLocationsWithNames(): LiveData<List<Location>>
 
     @Query("DELETE FROM followed_locations WHERE id = :id")
     suspend fun deleteFollowedLocation(id: Int)

@@ -4,30 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.controlwork.databinding.FragmentFollowedLocationsBinding
 import com.example.controlwork.modelViews.main.FollowedLocationsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FollowedLocationsFragment : Fragment() {
-    private lateinit var _binding: FragmentFollowedLocationsBinding
+    private lateinit var binding: FragmentFollowedLocationsBinding
+    private val followedLocationsViewModel: FollowedLocationsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val followedLocationsViewModel =
-            ViewModelProvider(this).get(FollowedLocationsViewModel::class.java)
+        binding = FragmentFollowedLocationsBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        _binding = FragmentFollowedLocationsBinding.inflate(inflater, container, false)
-        val root: View = _binding.root
+        val recyclerView = binding.recyclerViewFollowedLocations
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        val textView: TextView = _binding.textFollowedLocations
-        followedLocationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        followedLocationsViewModel.getFollowedLocations().observe(viewLifecycleOwner, Observer { locations ->
+            recyclerView.adapter = FollowedLocationsListAdapter(locations)
+        })
+
         return root
     }
 }

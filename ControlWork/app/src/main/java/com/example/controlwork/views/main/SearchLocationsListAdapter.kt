@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controlwork.R
+import com.example.controlwork.infrastructure.utils.TextHelper.Companion.getCountryFlag
 import com.example.controlwork.models.location.Location
 
 class SearchLocationsListAdapter(private val onLocationClick: (Location) -> Unit) :
@@ -39,23 +40,6 @@ class SearchLocationsListAdapter(private val onLocationClick: (Location) -> Unit
         fun bind(location: Location, onLocationClick: (Location) -> Unit) {
             locationName.text = "${location.name} ${getCountryFlag(location.country)}"
             itemView.setOnClickListener { onLocationClick(location) }
-        }
-
-        private fun getCountryFlag(countryCode: String): String {
-            val upperCaseCode = countryCode.uppercase()
-            if (upperCaseCode.length != 2) {
-                throw IllegalArgumentException("Country code must be a two-letter ISO code.")
-            }
-
-            if (upperCaseCode == "RU") {
-                return "\uD83C\uDFAA"
-            }
-
-            return upperCaseCode.map {
-                    char -> 0x1F1E6 + (char - 'A')
-            }.joinToString("") {
-                String(Character.toChars(it))
-            }
         }
     }
 }

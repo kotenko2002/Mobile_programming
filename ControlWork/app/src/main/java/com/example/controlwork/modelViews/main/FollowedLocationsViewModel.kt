@@ -1,13 +1,17 @@
 package com.example.controlwork.modelViews.main
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.controlwork.infrastructure.db.FollowedLocationDao
+import com.example.controlwork.models.location.Location
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FollowedLocationsViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is followed locations Fragment"
+@HiltViewModel
+class FollowedLocationsViewModel @Inject constructor(
+    private val followedLocationDao: FollowedLocationDao
+) : ViewModel() {
+    fun getFollowedLocations(): LiveData<List<Location>> {
+        return followedLocationDao.getFollowedLocationsWithNames()
     }
-    val text: LiveData<String> = _text
 }
