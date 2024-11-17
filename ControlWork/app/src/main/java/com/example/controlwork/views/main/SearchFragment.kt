@@ -19,7 +19,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var _binding: FragmentSearchBinding
     private val _searchViewModel: SearchViewModel by viewModels()
-    private lateinit var adapter: CityAdapter
+    private lateinit var adapter: SearchLocationsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,15 +29,15 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = _binding.root
 
-        adapter = CityAdapter { city ->
-            Toast.makeText(requireContext(), "User have chosen option: ${city.id}", Toast.LENGTH_SHORT).show()
-            _binding.citySearchInput.text.clear()
+        adapter = SearchLocationsListAdapter { location ->
+            Toast.makeText(requireContext(), "User have chosen option: ${location.id}", Toast.LENGTH_SHORT).show()
+            _binding.locationSearchInput.text.clear()
         }
 
-        _binding.cityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        _binding.cityRecyclerView.adapter = adapter
+        _binding.locationsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        _binding.locationsRecyclerView.adapter = adapter
 
-        _binding.citySearchInput.addTextChangedListener { text ->
+        _binding.locationSearchInput.addTextChangedListener { text ->
             performSearch(text.toString())
         }
 
@@ -46,9 +46,9 @@ class SearchFragment : Fragment() {
 
     private fun performSearch(query: String) {
         if (query.length >= 2) {
-            _searchViewModel.searchCities(query).observe(viewLifecycleOwner) { cities ->
-                Log.d("SearchFragment", "Found cities: $cities")
-                adapter.submitList(cities)
+            _searchViewModel.searchLocations(query).observe(viewLifecycleOwner) { locations ->
+                Log.d("SearchFragment", "Found locations: $locations")
+                adapter.submitList(locations)
             }
         } else {
             adapter.submitList(emptyList())

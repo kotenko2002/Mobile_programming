@@ -2,18 +2,18 @@ package com.example.controlwork.modelViews.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.controlwork.infrastructure.db.CityDao
-import com.example.controlwork.models.city.City
+import com.example.controlwork.infrastructure.db.LocationDao
+import com.example.controlwork.models.location.Location
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val cityDao: CityDao
+    private val locationDao: LocationDao
 ) : ViewModel() {
 
-    fun searchCities(prefix: String): LiveData<List<City>> {
-        return cityDao.searchCitiesByName(prefix)
+    fun searchLocations(prefix: String): LiveData<List<Location>> {
+        return locationDao.searchLocationsByName(prefix)
     }
 }
 

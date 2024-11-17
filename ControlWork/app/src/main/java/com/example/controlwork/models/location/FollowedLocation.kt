@@ -9,7 +9,7 @@ import androidx.room.Index
     tableName = "followed_locations",
     foreignKeys = [
         ForeignKey(
-            entity = com.example.controlwork.models.city.City::class,
+            entity = Location::class,
             parentColumns = ["id"],
             childColumns = ["cityId"],
             onDelete = ForeignKey.CASCADE

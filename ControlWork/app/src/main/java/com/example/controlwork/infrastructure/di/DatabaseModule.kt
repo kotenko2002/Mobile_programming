@@ -3,7 +3,8 @@ package com.example.controlwork.infrastructure.di
 import android.content.Context
 import androidx.room.Room
 import com.example.controlwork.infrastructure.db.AppDatabase
-import com.example.controlwork.infrastructure.db.CityDao
+import com.example.controlwork.infrastructure.db.FollowedLocationDao
+import com.example.controlwork.infrastructure.db.LocationDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,12 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideCityDao(database: AppDatabase): CityDao {
-        return database.cityDao()
+    fun provideLocationDao(database: AppDatabase): LocationDao {
+        return database.locationDao()
+    }
+
+    @Provides
+    fun provideFollowedLocationDao(database: AppDatabase): FollowedLocationDao {
+        return database.followedLocationDao()
     }
 }

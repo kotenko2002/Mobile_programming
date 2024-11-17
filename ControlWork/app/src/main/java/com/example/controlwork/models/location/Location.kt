@@ -1,14 +1,14 @@
-package com.example.controlwork.models.city
+package com.example.controlwork.models.location
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Index
 
 @Entity(
-    tableName = "cities",
+    tableName = "locations",
     indices = [Index(value = ["name"], name = "index_name", unique = false)]
 )
-data class City(
+data class Location(
     @PrimaryKey
     val id: Int,
     val name: String,
