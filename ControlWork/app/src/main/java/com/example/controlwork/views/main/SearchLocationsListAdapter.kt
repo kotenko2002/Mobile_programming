@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.controlwork.R
 import com.example.controlwork.infrastructure.utils.TextHelper.Companion.getCountryFlag
@@ -39,7 +40,10 @@ class SearchLocationsListAdapter(private val _onLocationClick: (Location) -> Uni
         @SuppressLint("SetTextI18n")
         fun bind(location: Location, onLocationClick: (Location) -> Unit) {
             locationName.text = "${location.name} ${getCountryFlag(location.country)}"
-            itemView.setOnClickListener { onLocationClick(location) }
+            itemView.setOnClickListener {
+                onLocationClick(location)
+                Toast.makeText( itemView.context, "${location.name} has been added to the monitored locations list", Toast.LENGTH_LONG ).show()
+            }
         }
     }
 }

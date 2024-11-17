@@ -11,7 +11,8 @@ import com.example.controlwork.infrastructure.utils.TextHelper.Companion.getCoun
 import com.example.controlwork.models.location.Location
 
 class FollowedLocationsListAdapter(
-    private val _locations: List<Location>
+    private val _locations: List<Location>,
+    private val onLocationClick: (Location) -> Unit
 ) : RecyclerView.Adapter<FollowedLocationsListAdapter.LocationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
@@ -21,7 +22,7 @@ class FollowedLocationsListAdapter(
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        holder.bind(_locations[position])
+        holder.bind(_locations[position], onLocationClick)
     }
 
     override fun getItemCount(): Int = _locations.size
@@ -30,8 +31,9 @@ class FollowedLocationsListAdapter(
         private val locationName: TextView = itemView.findViewById(R.id.textViewLocationName)
 
         @SuppressLint("SetTextI18n")
-        fun bind(location: Location) {
+        fun bind(location: Location, onLocationClick: (Location) -> Unit) {
             locationName.text = "${location.name} ${getCountryFlag(location.country)}"
+            itemView.setOnClickListener { onLocationClick(location) }
         }
     }
 }
