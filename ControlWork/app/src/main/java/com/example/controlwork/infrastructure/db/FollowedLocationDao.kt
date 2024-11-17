@@ -13,7 +13,6 @@ interface FollowedLocationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertFollowedLocation(followedLocation: FollowedLocation)
 
-
     @Query("""
         SELECT locations.id, locations.name, locations.country 
         FROM followed_locations 

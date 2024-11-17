@@ -10,13 +10,7 @@ import com.example.controlwork.models.location.Location
 @Dao
 interface LocationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertLocation(location: Location)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertLocations(locations: List<Location>)
-
-    @Query("SELECT * FROM locations")
-    fun getAllLocation(): LiveData<List<Location>>
 
     @Query("SELECT COUNT(*) FROM locations")
     suspend fun getLocationsCount(): Int
