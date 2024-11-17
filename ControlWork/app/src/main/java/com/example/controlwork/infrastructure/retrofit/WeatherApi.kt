@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface WeatherApi {
     @GET("weather")
-    fun getWeatherDataByCityId(
-        @Query("id") cityId: Int
+    fun getWeatherDataByLocationId(
+        @Query("id") locationId: Int
     ): Call<WeatherData>
 }

@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.controlwork.models.location.Location
 import com.example.controlwork.models.location.FollowedLocation
 
-@Database(entities = [Location::class, FollowedLocation::class], version = 4, exportSchema = false)
+@Database(entities = [Location::class, FollowedLocation::class], version = 5, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun locationDao(): LocationDao
     abstract fun followedLocationDao(): FollowedLocationDao

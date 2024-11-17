@@ -11,14 +11,14 @@ import androidx.room.Index
         ForeignKey(
             entity = Location::class,
             parentColumns = ["id"],
-            childColumns = ["cityId"],
+            childColumns = ["locationId"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index(value = ["cityId"], name = "index_city_id")]
+    indices = [Index(value = ["locationId"], name = "index_location_id")]
 )
 data class FollowedLocation(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val cityId: Int
+    val locationId: Int
 )
