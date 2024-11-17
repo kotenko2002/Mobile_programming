@@ -29,35 +29,3 @@ class SearchViewModel @Inject constructor(
         }
     }
 }
-
-/*
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.controlwork.infrastructure.db.CityDao
-import com.example.controlwork.models.city.City
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-import kotlinx.coroutines.launch
-
-@HiltViewModel
-class SearchViewModel @Inject constructor(
-    private val cityDao: CityDao
-) : ViewModel() {
-    fun upsertCity(city: City) {
-        viewModelScope.launch {
-            cityDao.upsertCity(city)
-        }
-    }
-
-    fun getAllCities(): LiveData<List<City>> {
-        return cityDao.getAllCities()
-    }
-
-    fun searchCities(prefix: String): LiveData<List<City>> {
-        return cityDao.searchCitiesByName(prefix)
-    }
-}
- */

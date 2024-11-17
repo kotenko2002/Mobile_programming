@@ -1,8 +1,8 @@
 package com.example.controlwork.views.locationWeather
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,12 +24,11 @@ class LocationWeatherActivity : AppCompatActivity() {
         setContentView(_binding.root)
 
         getLocationIdFromIntent()
-        Toast.makeText(this, "Ти на сторінці $_locationId", Toast.LENGTH_LONG).show()
 
         _locationWeatherViewModel.getWeatherDataByLocationId(_locationId)
         observeWeatherData()
 
-        setupButtonClickListener()
+        setupButtonsClickListeners()
     }
 
     private fun getLocationIdFromIntent() {
@@ -37,14 +36,30 @@ class LocationWeatherActivity : AppCompatActivity() {
         _locationId = intent.getIntExtra("LOCATION_ID", 0)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observeWeatherData() {
-        _locationWeatherViewModel.observeWeatherLiveData().observe(this) {
-            value -> Log.d("TEST3", value.toString())
+        _locationWeatherViewModel.observeWeatherLiveData().observe(this) { weatherData ->
+            _binding.tvCityName.text = "City Name: ${weatherData.name}"
+            _binding.tvTemperature.text = "Temperature: ${weatherData.main.temp}°C"
+            _binding.tvWeatherDescription.text =
+                "Description: ${weatherData.weather.joinToString(", ") { it.description }}"
+            _binding.tvWindSpeed.text = "Wind Speed: ${weatherData.wind.speed} m/s"
+            _binding.tvPressure.text = "Pressure: ${weatherData.main.pressure} hPa"
+            _binding.tvHumidity.text = "Humidity: ${weatherData.main.humidity}%"
+            _binding.tvVisibility.text = "Visibility: ${weatherData.visibility} m"
         }
     }
 
-    private fun setupButtonClickListener() {
+    private fun setupButtonsClickListeners() {
         _binding.btnGoToMain.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        _binding.btnStopFollowing.setOnClickListener {
+            _locationWeatherViewModel.stopFollowingLocation(_locationId)
+            Toast.makeText(this, "Successfully stopped following location", Toast.LENGTH_SHORT).show()
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

@@ -22,6 +22,6 @@ interface FollowedLocationDao {
     """)
     fun getFollowedLocationsWithNames(): LiveData<List<Location>>
 
-    @Query("DELETE FROM followed_locations WHERE id = :id")
+    @Query("DELETE FROM followed_locations WHERE locationId = :id")
     suspend fun deleteFollowedLocation(id: Int)
 }
