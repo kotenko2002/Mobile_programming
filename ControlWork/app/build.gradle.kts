@@ -51,6 +51,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.androidx.room.testing)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -63,6 +65,7 @@ dependencies {
 
     // Room
     implementation(libs.androidx.room.runtime)
+    androidTestImplementation(libs.androidx.core.testing)
     annotationProcessor(libs.androidx.room.compiler)
     kapt("androidx.room:room-compiler:2.6.1")
     implementation(libs.androidx.room.ktx)

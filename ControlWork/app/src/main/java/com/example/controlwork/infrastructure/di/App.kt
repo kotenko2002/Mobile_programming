@@ -42,7 +42,7 @@ object DatabaseInitializer {
         }
     }
 
-    private fun loadLocationsFromJson(context: Context, fileName: String): List<Location> {
+    fun loadLocationsFromJson(context: Context, fileName: String): List<Location> {
         val inputStream = context.assets.open(fileName)
         val reader = InputStreamReader(inputStream)
         val type = object : TypeToken<List<Map<String, Any>>>() {}.type
